@@ -81,7 +81,7 @@ namespace ServerMultiRoom
                 for (int i = 0; i < str.Length; i++)
                 {
                     string[] splitstr = str[i].Split('-');
-                    if (!(DateTime.Now > Convert.ToDateTime(splitstr[1])))
+                    if ((splitstr[1] == "permanent") || !(DateTime.Now > Convert.ToDateTime(splitstr[1])))
                         strnew.Add(str[i]);
 
                 }
@@ -114,7 +114,7 @@ namespace ServerMultiRoom
                 for (int i = 0; i < str.Length; i++)
                 {
                     string[] splitstr = str[i].Split('-');
-                    if (!(DateTime.Now > Convert.ToDateTime(splitstr[1])))
+                    if ((splitstr[1] == "permanent") || !(DateTime.Now > Convert.ToDateTime(splitstr[1])))
                         strnew.Add(str[i]);
 
                 }

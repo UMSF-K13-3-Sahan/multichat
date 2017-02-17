@@ -43,6 +43,7 @@
             this.lb_hint = new System.Windows.Forms.Label();
             this.lb_rooms = new System.Windows.Forms.Label();
             this.lb_clients = new System.Windows.Forms.Label();
+            this.label1 = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // btn_login
@@ -174,9 +175,9 @@
             this.lb_hint.AutoSize = true;
             this.lb_hint.Location = new System.Drawing.Point(10, 9);
             this.lb_hint.Name = "lb_hint";
-            this.lb_hint.Size = new System.Drawing.Size(148, 13);
+            this.lb_hint.Size = new System.Drawing.Size(81, 13);
             this.lb_hint.TabIndex = 12;
-            this.lb_hint.Text = "Enter username(3-15 symbols)";
+            this.lb_hint.Text = "Enter username";
             // 
             // lb_rooms
             // 
@@ -198,11 +199,22 @@
             this.lb_clients.Text = "Users";
             this.lb_clients.Visible = false;
             // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(19, 32);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(35, 13);
+            this.label1.TabIndex = 16;
+            this.label1.Text = "label1";
+            this.label1.Visible = false;
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(296, 483);
+            this.Controls.Add(this.label1);
             this.Controls.Add(this.lb_clients);
             this.Controls.Add(this.lb_rooms);
             this.Controls.Add(this.lb_hint);
@@ -242,6 +254,7 @@
         private System.Windows.Forms.Label lb_hint;
         private System.Windows.Forms.Label lb_rooms;
         private System.Windows.Forms.Label lb_clients;
+        private System.Windows.Forms.Label label1;
     }
 }
 

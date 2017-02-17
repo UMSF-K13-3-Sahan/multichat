@@ -6,6 +6,7 @@ using System.Drawing;
 using System.Linq;
 using System.Net.Sockets;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
@@ -26,8 +27,6 @@ namespace MyNewChatClient
             this.type = type;
             this.request = request;
             SelectType();
-            
-
         }
         private void SelectType()
         {
@@ -80,12 +79,23 @@ namespace MyNewChatClient
                     break;
                 case "createroom":
                     CreateRoom cr = new CreateRoom();
-                    cr.CreateHendler(tb.Text.ToString(),client.GetStream(), request);
-                    this.Close();
+                    if (ChekName())
+                    {
+                        cr.CreateHendler(tb.Text.ToString(), client.GetStream(), request);
+                        this.Close();
+                    }
+                    else
+                        MessageBox.Show("Имя комнаты должно содержать только буквы и цифры и содержать не более 9 символов");
                     break;
-
-
             }
+        }
+
+        private bool ChekName()
+        {
+            Regex rgx = new Regex("^[а-яА-ЯёЁa-zA-Z0-9]+$");
+            if(rgx.IsMatch(tb.Text.ToString()) && tb.Text.ToString().Length <=9)
+                return true;
+            return false;
         }
 
         private void btn2_Click(object sender, EventArgs e)

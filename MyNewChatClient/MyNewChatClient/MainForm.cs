@@ -2,6 +2,7 @@
 using System;
 using System.IO;
 using System.Net.Sockets;
+using System.Text.RegularExpressions;
 using System.Threading;
 using System.Windows.Forms;
 
@@ -46,8 +47,12 @@ namespace MyNewChatClient
         }
         private void btn_login_Click(object sender, EventArgs e)
         {
-            if (txt_name.Text.Length > 3 && txt_name.Text.Length < 15)
+            if(txt_name.Text.Length ==0)
+                MessageBox.Show("Введите имя!");
+            else if (CheckName())
             {
+                try
+                {
                 client = new TcpClient();
                 client.Connect("127.0.0.1", 8888);
                 auth.LogInHendler(client, txt_name.Text);
@@ -67,17 +72,48 @@ namespace MyNewChatClient
                 btn_login.Visible = false;
                 txt_name.Visible = false;
                 lb_hint.Visible = false;
+                label1.Text = txt_name.Text;
+                label1.Visible = true;
 
                 refresh.RefreshHendler(client.GetStream(), "Rooms", request);
                 refresh.RefreshHendler(client.GetStream(), "clients", request);
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message);
+                }
             }
             else
-                MessageBox.Show("Введи имя нормально!");
+                MessageBox.Show("Имя может содержать только буквы и цифры не более 15 символов");
+        }
+
+        private bool CheckName()
+        {
+            Regex rgx = new Regex("^[а-яА-ЯёЁa-zA-Z0-9]+$");
+            if (rgx.IsMatch(txt_name.Text.ToString()) && txt_name.Text.ToString().Length <= 15)
+                return true;
+            return false;
         }
 
         private void btn_logout_Click(object sender, EventArgs e)
         {
             auth.LogoutHendler(client, request);
+            lst_rooms.Visible = false;
+            btn_create_room.Visible = false;
+            btn_refresh_rooms.Visible = false;
+            btn_room_enter.Visible = false;
+            btn_refresh_clients.Visible = false;
+            btn_private.Visible = false;
+            lst_clients.Visible = false;
+            lb_rooms.Visible = false;
+            lb_clients.Visible = false;
+            btn_logout.Visible = false;
+
+            label1.Visible = false;
+
+            btn_login.Visible = true;
+            txt_name.Visible = true;
+            lb_hint.Visible = true;
         }
 
         private void btn_refresh_rooms_Click(object sender, EventArgs e)

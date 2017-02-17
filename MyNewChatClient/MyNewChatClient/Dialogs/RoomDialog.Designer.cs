@@ -64,9 +64,7 @@
             // 
             // lst_messages
             // 
-            this.lst_messages.Enabled = false;
             this.lst_messages.FormattingEnabled = true;
-            this.lst_messages.HorizontalExtent = 1;
             this.lst_messages.HorizontalScrollbar = true;
             this.lst_messages.Location = new System.Drawing.Point(12, 12);
             this.lst_messages.Name = "lst_messages";

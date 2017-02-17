@@ -25,7 +25,6 @@ namespace MyNewChatClient
             StreamWriter writer = new StreamWriter(client.GetStream());
             writer.WriteLine(JsonConvert.SerializeObject(request));
             writer.Flush();
-            Environment.Exit(0);
         }
     }
 }
