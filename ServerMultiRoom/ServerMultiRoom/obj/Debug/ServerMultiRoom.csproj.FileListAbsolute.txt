@@ -35,3 +35,6 @@ C:\Users\nikit\Desktop\Чат\ServerMultiRoom\ServerMultiRoom\bin\Debug\ServerMu
 C:\Users\nikit\Desktop\Чат\ServerMultiRoom\ServerMultiRoom\bin\Debug\ServerMultiRoom.pdb
 C:\Users\nikit\Desktop\Чат\ServerMultiRoom\ServerMultiRoom\bin\Debug\Newtonsoft.Json.dll
 C:\Users\nikit\Desktop\Чат\ServerMultiRoom\ServerMultiRoom\bin\Debug\Newtonsoft.Json.xml
+C:\Users\nikit\Desktop\Чат\multichat\ServerMultiRoom\ServerMultiRoom\bin\Debug\ServerMultiRoom.exe.config
+C:\Users\nikit\Desktop\Чат\multichat\ServerMultiRoom\ServerMultiRoom\obj\Debug\ServerMultiRoom.exe
+C:\Users\nikit\Desktop\Чат\multichat\ServerMultiRoom\ServerMultiRoom\obj\Debug\ServerMultiRoom.pdb
