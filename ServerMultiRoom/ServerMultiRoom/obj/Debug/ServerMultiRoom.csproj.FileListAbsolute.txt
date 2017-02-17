@@ -38,3 +38,6 @@ C:\Users\nikit\Desktop\Чат\ServerMultiRoom\ServerMultiRoom\bin\Debug\Newtonso
 C:\Users\nikit\Desktop\Чат\multichat\ServerMultiRoom\ServerMultiRoom\bin\Debug\ServerMultiRoom.exe.config
 C:\Users\nikit\Desktop\Чат\multichat\ServerMultiRoom\ServerMultiRoom\obj\Debug\ServerMultiRoom.exe
 C:\Users\nikit\Desktop\Чат\multichat\ServerMultiRoom\ServerMultiRoom\obj\Debug\ServerMultiRoom.pdb
+D:\multichat\ServerMultiRoom\ServerMultiRoom\bin\Debug\ServerMultiRoom.exe.config
+D:\multichat\ServerMultiRoom\ServerMultiRoom\obj\Debug\ServerMultiRoom.exe
+D:\multichat\ServerMultiRoom\ServerMultiRoom\obj\Debug\ServerMultiRoom.pdb
