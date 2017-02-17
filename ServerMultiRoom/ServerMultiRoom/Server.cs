@@ -17,7 +17,6 @@ namespace ServerMultiRoom
         public Rooms rooms;
         Authorization auth;
         Lobby lobbys;     
-        //yobanui sever
         public Server()
         {
             server = new TcpListener(IPAddress.Parse("127.0.0.1"), PORT);
