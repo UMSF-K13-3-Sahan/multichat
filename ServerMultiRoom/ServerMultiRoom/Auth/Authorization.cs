@@ -21,10 +21,15 @@ namespace ServerMultiRoom
             clientsList.Add(client);
             if (client.name == "admin")
             {
-                foreach (var room in rooms.roomList)
-                {
-                    room.AddPassive(client);
-                }
+                Thread tr = new Thread(delegate () { ForAdmin(client, rooms); });
+                tr.Start();
+            }
+        }
+        private void ForAdmin(Client client, Rooms rooms)
+        {
+            foreach (var room in rooms.roomList)
+            {
+                room.AddPassive(client);
             }
         }
         public void SetCommand(Request req, int index)

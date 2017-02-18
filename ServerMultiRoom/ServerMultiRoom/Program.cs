@@ -11,8 +11,8 @@ namespace ServerMultiRoom
         static void Main(string[] args)
         {
             Server server = new Server();
+            server.DeleteLogs();
             server.Start();
-
         }
     }
 }

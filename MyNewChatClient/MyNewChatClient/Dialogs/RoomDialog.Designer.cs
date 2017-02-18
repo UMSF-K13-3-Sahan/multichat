@@ -30,8 +30,8 @@
         {
             this.btn_back = new System.Windows.Forms.Button();
             this.btn_send = new System.Windows.Forms.Button();
-            this.txt_msg = new System.Windows.Forms.TextBox();
-            this.lst_messages = new System.Windows.Forms.ListBox();
+            this.rtb_message = new System.Windows.Forms.RichTextBox();
+            this.txt_msg = new System.Windows.Forms.RichTextBox();
             this.SuspendLayout();
             // 
             // btn_back
@@ -55,22 +55,21 @@
             this.btn_send.UseVisualStyleBackColor = true;
             this.btn_send.Click += new System.EventHandler(this.btn_send_Click);
             // 
+            // rtb_message
+            // 
+            this.rtb_message.Location = new System.Drawing.Point(12, 12);
+            this.rtb_message.Name = "rtb_message";
+            this.rtb_message.Size = new System.Drawing.Size(475, 288);
+            this.rtb_message.TabIndex = 3;
+            this.rtb_message.Text = "";
+            // 
             // txt_msg
             // 
-            this.txt_msg.Location = new System.Drawing.Point(12, 315);
+            this.txt_msg.Location = new System.Drawing.Point(15, 319);
             this.txt_msg.Name = "txt_msg";
-            this.txt_msg.Size = new System.Drawing.Size(475, 20);
-            this.txt_msg.TabIndex = 2;
-            // 
-            // lst_messages
-            // 
-            this.lst_messages.FormattingEnabled = true;
-            this.lst_messages.HorizontalScrollbar = true;
-            this.lst_messages.Location = new System.Drawing.Point(12, 12);
-            this.lst_messages.Name = "lst_messages";
-            this.lst_messages.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.lst_messages.Size = new System.Drawing.Size(475, 290);
-            this.lst_messages.TabIndex = 3;
+            this.txt_msg.Size = new System.Drawing.Size(471, 18);
+            this.txt_msg.TabIndex = 4;
+            this.txt_msg.Text = "";
             // 
             // RoomDialog
             // 
@@ -79,8 +78,8 @@
             this.CancelButton = this.btn_back;
             this.ClientSize = new System.Drawing.Size(580, 350);
             this.ControlBox = false;
-            this.Controls.Add(this.lst_messages);
             this.Controls.Add(this.txt_msg);
+            this.Controls.Add(this.rtb_message);
             this.Controls.Add(this.btn_send);
             this.Controls.Add(this.btn_back);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
@@ -89,7 +88,6 @@
             this.Name = "RoomDialog";
             this.Text = "chat";
             this.ResumeLayout(false);
-            this.PerformLayout();
 
         }
 
@@ -97,7 +95,7 @@
 
         private System.Windows.Forms.Button btn_back;
         private System.Windows.Forms.Button btn_send;
-        private System.Windows.Forms.TextBox txt_msg;
-        public System.Windows.Forms.ListBox lst_messages;
+        public System.Windows.Forms.RichTextBox rtb_message;
+        private System.Windows.Forms.RichTextBox txt_msg;
     }
 }

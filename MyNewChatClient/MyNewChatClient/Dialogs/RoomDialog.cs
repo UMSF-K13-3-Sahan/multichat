@@ -20,12 +20,16 @@ namespace MyNewChatClient
         }
         private void btn_send_Click(object sender, EventArgs e)
         {
-            room.SendHendler(txt_msg.Text, request);
-            txt_msg.Text = "";
+           if( room.SendHendler(txt_msg.Text, request) )
+                txt_msg.Text = "";
         }
         private void btn_back_Click(object sender, EventArgs e)
         {
             room.LeaveHendler(sender, request);
+        }
+        private void txt_msg_TextChanged(object sender, EventArgs e)
+        {
+            room.ChengeTextHendler(txt_msg.Text);
         }
     }
 }

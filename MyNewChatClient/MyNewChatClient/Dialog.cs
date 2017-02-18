@@ -13,7 +13,6 @@ using System.Windows.Forms;
 namespace MyNewChatClient
 {
     public partial class Dialog : Form
-
     {
         string name;
         TcpClient client;
@@ -103,10 +102,13 @@ namespace MyNewChatClient
             switch (type)
             {
                 case "ban":
-                    Ban b = new Ban( name);
-                    b.ForTimeBanHendler(Convert.ToInt32(tb.Text.ToString()),client.GetStream(), request);
-                    MessageBox.Show(name + "has been banned for "+ tb.Text.ToString()+"seconds");
-                    this.Close();
+                    if (!ChekTime())
+                    {
+                        Ban b = new Ban(name);
+                        b.ForTimeBanHendler(Convert.ToInt32(tb.Text.ToString()), client.GetStream(), request);
+                        MessageBox.Show(name + "has been banned for " + tb.Text.ToString() + "seconds");
+                        this.Close();
+                    }
                     break;
                 case "unban":
                     Unban unb = new Unban( name);
@@ -118,6 +120,28 @@ namespace MyNewChatClient
                     this.Close();
                     break;
             }
+        }
+        private bool ChekTime()
+        {
+            try
+            {
+                if (Convert.ToInt32(tb.Text.ToString()) > 12345)
+                {
+                    MessageBox.Show("максимальное время бана 12345 секунд");
+                    return true;
+                }
+                if (Convert.ToInt32(tb.Text.ToString()) < 60 )
+                {
+                    MessageBox.Show("Минимальное время бана 1 минута");
+                    return true;
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Можно вводить тольцо цифры");
+                return true;
+            }
+            return false;
         }
     }
 }

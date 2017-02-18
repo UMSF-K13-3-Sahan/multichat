@@ -43,3 +43,11 @@ C:\Users\nikit\Desktop\Чат\multichat\ServerMultiRoom\ServerMultiRoom\bin\Debu
 C:\Users\nikit\Desktop\Чат\multichat\ServerMultiRoom\ServerMultiRoom\bin\Debug\Newtonsoft.Json.dll
 C:\Users\nikit\Desktop\Чат\multichat\ServerMultiRoom\ServerMultiRoom\bin\Debug\Newtonsoft.Json.xml
 C:\Users\nikit\Desktop\Чат\multichat\ServerMultiRoom\ServerMultiRoom\obj\Debug\ServerMultiRoom.csprojResolveAssemblyReference.cache
+C:\Users\nikit\Desktop\game\Чат\multichat\ServerMultiRoom\ServerMultiRoom\bin\Debug\ServerMultiRoom.exe.config
+C:\Users\nikit\Desktop\game\Чат\multichat\ServerMultiRoom\ServerMultiRoom\obj\Debug\ServerMultiRoom.exe
+C:\Users\nikit\Desktop\game\Чат\multichat\ServerMultiRoom\ServerMultiRoom\obj\Debug\ServerMultiRoom.pdb
+C:\Users\nikit\Desktop\game\Чат\multichat\ServerMultiRoom\ServerMultiRoom\bin\Debug\ServerMultiRoom.exe
+C:\Users\nikit\Desktop\game\Чат\multichat\ServerMultiRoom\ServerMultiRoom\bin\Debug\ServerMultiRoom.pdb
+C:\Users\nikit\Desktop\game\Чат\multichat\ServerMultiRoom\ServerMultiRoom\bin\Debug\Newtonsoft.Json.dll
+C:\Users\nikit\Desktop\game\Чат\multichat\ServerMultiRoom\ServerMultiRoom\bin\Debug\Newtonsoft.Json.xml
+C:\Users\nikit\Desktop\game\Чат\multichat\ServerMultiRoom\ServerMultiRoom\obj\Debug\ServerMultiRoom.csprojResolveAssemblyReference.cache

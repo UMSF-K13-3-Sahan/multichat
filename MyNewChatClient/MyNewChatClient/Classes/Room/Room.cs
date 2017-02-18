@@ -6,6 +6,7 @@ using System.Linq;
 using System.Net.Sockets;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 
 namespace MyNewChatClient
 {
@@ -19,9 +20,13 @@ namespace MyNewChatClient
         {
             this.connection = connection;
         }
-
-        public void SendHendler(object sender, Request request)
+        public bool SendHendler(object sender, Request request)
         {
+            if ((sender as string).Length > 500)
+            {
+                MessageBox.Show("Большой текст");
+                return false;
+            }
             request.modul = "rooms";
             request.command = "message";
             request.data = sender as string;
@@ -29,8 +34,8 @@ namespace MyNewChatClient
             StreamWriter writer = new StreamWriter(connection.GetStream());
             writer.WriteLine(JsonConvert.SerializeObject(request));
             writer.Flush();
+            return true;
         }
-
         public void LeaveHendler(object sender, Request request)
         {
             request.modul = "rooms";
@@ -39,6 +44,11 @@ namespace MyNewChatClient
             StreamWriter writer = new StreamWriter(connection.GetStream());
             writer.WriteLine(JsonConvert.SerializeObject(request));
             writer.Flush();
+        }
+        public void ChengeTextHendler(string text)
+        {
+            if (text.Length > 500)
+                MessageBox.Show("Большой текст");
         }
     }
 }

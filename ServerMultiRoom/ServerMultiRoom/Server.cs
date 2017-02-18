@@ -6,6 +6,7 @@ using System.Net;
 using System.Net.Sockets;
 using System.Threading;
 using Newtonsoft.Json;
+using System;
 
 namespace ServerMultiRoom
 {
@@ -17,7 +18,7 @@ namespace ServerMultiRoom
         public Rooms rooms;
         Authorization auth;
         Lobby lobbys;     
-        //vasiliu
+
         public Server()
         {
             server = new TcpListener(IPAddress.Parse("127.0.0.1"), PORT);
@@ -43,46 +44,60 @@ namespace ServerMultiRoom
             {
                 for (int i = 0; i < clientsList.Count; i++)
                 {
-                    StreamReader reader = new StreamReader(clientsList[i].netStream);
-                    if (clientsList[i].netStream.DataAvailable)
+                    try
                     {
-                        string message = reader.ReadLine();
-                        Request req = JsonConvert.DeserializeObject<Request>(message);
-                        switch (req.modul)
+                        if (clientsList[i].netStream.DataAvailable)
                         {
-                            case "rooms":
-                                rooms.SetCommand(req, i);                                                         
-                                break;
-                            case "lobby":
-                                lobbys.SetCommand(req, i);
-                                break;
-                            case "auth":
-                                auth.SetCommand(req, i);
-                                break;                           
+                            string message = clientsList[i].Read();
+                            Request req = JsonConvert.DeserializeObject<Request>(message);
+                            switch (req.modul)
+                            {
+                                case "rooms":
+                                    rooms.SetCommand(req, i);
+                                    break;
+                                case "lobby":
+                                    lobbys.SetCommand(req, i);
+                                    break;
+                                case "auth":
+                                    auth.SetCommand(req, i);
+                                    break;
+                            }
                         }
+                    }
+                    catch(Exception ex)
+                    {
+                     //   clientsList.Remove(clientsList[i]);
                     }
                 }
             }
         }
         public void SetRoom(List<Client> clientsList, Rooms rms, int index)
         {
-            string rooms = "";
+            string roomss = "";
             foreach (var room in rms.roomList)
             {
                 if (room.privateroom && room.IsHere(clientsList.ElementAt(index)))
-                    rooms += room.name + ".";
+                    roomss += room.name + ".";
                 if (!room.privateroom)
-                    rooms += room.name + ".";
-
+                    roomss += room.name + ".";
             }
-            rooms = rooms.TrimEnd('.');
+            roomss = roomss.TrimEnd('.');
 
-            Request req = new Request("refresh", null, rooms);
+            Request req = new Request("refresh", null, roomss);
             string responce = JsonConvert.SerializeObject(req);
 
             StreamWriter writer = new StreamWriter(clientsList.ElementAt(index).netStream);
             writer.WriteLine(responce);
             writer.Flush();
+
+            for (int z = 0; z < rooms.roomList.Count; z++)
+            {
+                if (rooms.roomList[z].IsPassive(clientsList.ElementAt(index)))
+                {
+                    Thread.Sleep(100);
+                    rooms.roomList[z].SendForPassiv();
+                }
+            }
         }
         public void SetClient(List<Client> clientsList, int index)
         {
@@ -91,6 +106,10 @@ namespace ServerMultiRoom
             {
                 if (client.name == "admin")
                     continue;
+                if(index == clientsList.Count)
+                {
+                    --index;
+                }
                 if (client != clientsList.ElementAt(index))
                     clients += client.name + ".";
             }
@@ -102,6 +121,15 @@ namespace ServerMultiRoom
             StreamWriter writer = new StreamWriter(clientsList.ElementAt(index).netStream);
             writer.WriteLine(responce);
             writer.Flush();
+        }
+        public void DeleteLogs()
+        {
+            DirectoryInfo dirInfo = new DirectoryInfo("logs/");
+
+            foreach (FileInfo file in dirInfo.GetFiles())
+            {
+                file.Delete();
+            }
         }
     }
 }

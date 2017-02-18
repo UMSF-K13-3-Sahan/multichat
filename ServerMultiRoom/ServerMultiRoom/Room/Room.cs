@@ -2,6 +2,7 @@
 using System.IO;
 using System.Linq;
 using Newtonsoft.Json;
+using System;
 
 namespace ServerMultiRoom
 {
@@ -23,12 +24,23 @@ namespace ServerMultiRoom
         }
         public void CreatePrivate(Client namecreator,Client nameinvited)
         {
-            activeList.Add(namecreator);
-            pasive.Add(nameinvited,0);
-            Request req = new Request("enter", nameinvited.name + "+" + namecreator.name, "nomissed");
-            StreamWriter sq = new StreamWriter(namecreator.netStream);
-            sq.WriteLine(JsonConvert.SerializeObject(req));
-            sq.Flush();
+            try
+            {
+                activeList.Add(namecreator);
+                pasive.Add(nameinvited, 0);
+                Request req = new Request("enter", nameinvited.name + "+" + namecreator.name, "nomissed");
+                StreamWriter sq = new StreamWriter(namecreator.netStream);
+                sq.WriteLine(JsonConvert.SerializeObject(req));
+                sq.Flush();
+            }
+            catch(Exception ex)
+            {
+                StreamWriter sw = new StreamWriter(namecreator.netStream);
+                Request request = new Request("wrongprivate", null, null);
+                string responce = JsonConvert.SerializeObject(request);
+                sw.WriteLine(responce);
+                sw.Flush();
+            }
             
         }
         public string Add(Client client, string room)

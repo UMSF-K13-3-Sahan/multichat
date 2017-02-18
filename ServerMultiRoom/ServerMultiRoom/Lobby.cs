@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace ServerMultiRoom
@@ -26,6 +27,7 @@ namespace ServerMultiRoom
                     {
                         if (server.rooms.roomList[z].IsPassive(server.clientsList.ElementAt(index)))
                         {
+                            Thread.Sleep(100);
                             server.rooms.roomList[z].SendForPassiv();
                         }
                     }

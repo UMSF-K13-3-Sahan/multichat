@@ -24,6 +24,28 @@ namespace ServerMultiRoom
             switch (req.command)
             {
                 case "createroom":
+                    if (IsBanned(srv.clientsList.ElementAt(index)))
+                    {
+                        Request req2 = new Request("bancreate", null, "Вы забанено до " + BanTime(srv.clientsList.ElementAt(index)));
+                        string responce2 = JsonConvert.SerializeObject(req2);
+
+                        writer = new StreamWriter(srv.clientsList.ElementAt(index).netStream);
+                        writer.WriteLine(responce2);
+                        writer.Flush();
+                        break;
+                    }
+                    if (File.Exists("logs/" + req.data + ".txt"))
+                    {
+                        Request req2 = new Request("wrongroom", null, req.data);
+                        string responce2 = JsonConvert.SerializeObject(req2);
+
+                        writer = new StreamWriter(srv.clientsList.ElementAt(index).netStream);
+                        writer.WriteLine(responce2);
+                        writer.Flush();
+                        break;
+                    }
+                    FileStream fs = File.Create("logs/" + req.data + ".txt");
+                    fs.Close();
                     roomList.Add(new Room(req.data));
                     if (srv.clientsList.Find(c => c.name == "admin") != null)
                     {
@@ -32,7 +54,6 @@ namespace ServerMultiRoom
                     Thread.Sleep(100);
                     srv.SetRoom(srv.clientsList, srv.rooms, index);
                     break;
-
                 case "leave":
                     roomList.Find(c => c.name == req.data).Leave(srv.clientsList.ElementAt(index));
 
@@ -51,9 +72,9 @@ namespace ServerMultiRoom
                     srv.SetRoom(srv.clientsList, srv.rooms, index);
                     break;
                 case "message":
-                    if (!IsBanned(srv.clientsList.ElementAt(index)))
+                    if (!IsBanned(srv.clientsList.ElementAt(index)) || roomList.Find(c => c.name == req.time).privateroom)
                         roomList.Find(c => c.name == req.time).BroadCast(srv.clientsList.ElementAt(index).name, req.data);
-                    if (IsBanned(srv.clientsList.ElementAt(index)))
+                    else if (IsBanned(srv.clientsList.ElementAt(index)))
                     {
                         Request req1 = new Request("youbanned", null, "you are banned to " + BanTime(srv.clientsList.ElementAt(index)));
                         string resp = JsonConvert.SerializeObject(req1);
@@ -64,9 +85,11 @@ namespace ServerMultiRoom
                     }
                     break;
                 case "privateroom":
-                    roomList.Add(new Room(req.data + "+" + srv.clientsList.ElementAt(index).name));
-                    roomList.Last().privateroom = true;
-                    roomList.Find(c => c.name == req.data + "+" + srv.clientsList.ElementAt(index).name).CreatePrivate(srv.clientsList.ElementAt(index), srv.clientsList.Find(c => c.name == req.data));
+
+                        roomList.Add(new Room(req.data + "+" + srv.clientsList.ElementAt(index).name));
+                        roomList.Last().privateroom = true;
+                        roomList.Find(c => c.name == req.data + "+" + srv.clientsList.ElementAt(index).name).
+                            CreatePrivate(srv.clientsList.ElementAt(index), srv.clientsList.Find(c => c.name == req.data));
                     break;
             }
         }

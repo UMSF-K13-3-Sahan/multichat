@@ -12,17 +12,17 @@ namespace ServerMultiRoom
         public string name { get; set; }
         public TcpClient client;
         public NetworkStream netStream;
+        private StreamReader sr;
         public Client(TcpClient client)
         {
             this.client = client;
             netStream = client.GetStream();
+            sr = new StreamReader(netStream);
             GetName();
         }
-
         public void GetName()
         {
-            StreamReader reader = new StreamReader(netStream);
-            name = reader.ReadLine();
+            name = sr.ReadLine();
             StreamWriter sw = new StreamWriter(client.GetStream());
             Request req;
             if (name == "admin")
@@ -35,7 +35,10 @@ namespace ServerMultiRoom
             }
             sw.WriteLine(JsonConvert.SerializeObject(req));
             sw.Flush();
-
+        }
+        public string Read()
+        {
+            return sr.ReadLine();
         }
     }
 

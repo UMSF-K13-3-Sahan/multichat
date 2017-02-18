@@ -80,6 +80,7 @@ namespace MyNewChatClient
                 }
                 catch (Exception ex)
                 {
+                    client = null;
                     MessageBox.Show(ex.Message);
                 }
             }
@@ -114,6 +115,9 @@ namespace MyNewChatClient
             btn_login.Visible = true;
             txt_name.Visible = true;
             lb_hint.Visible = true;
+            btn_ban.Visible = false;
+            btn_unban.Visible = false;
+            txt_name.Text = "";
         }
 
         private void btn_refresh_rooms_Click(object sender, EventArgs e)
@@ -181,6 +185,11 @@ namespace MyNewChatClient
                 Thread tr = new Thread(new ThreadStart(OpenDialogForm));
                 tr.Start();
             }
+        }
+        private void MainForm_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            if(client != null)
+            auth.LogoutHendler(client, request);
         }
     }
 }
