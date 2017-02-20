@@ -35,7 +35,8 @@ namespace ServerMultiRoom
                 TcpClient client = server.AcceptTcpClient();
                 auth.AddUser(client, clientsList, rooms);
                 Thread tr = new Thread(new ThreadStart(Receive));
-                tr.Start();             
+                tr.Start();
+                Thread.Sleep(100);            
             }
         }
         public void Receive()
@@ -62,6 +63,7 @@ namespace ServerMultiRoom
                                 break;                           
                         }
                     }
+                    Thread.Sleep(100);
                 }
             }
         }

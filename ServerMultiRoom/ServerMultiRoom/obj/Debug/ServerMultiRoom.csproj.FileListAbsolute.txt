@@ -41,3 +41,8 @@ C:\Users\nikit\Desktop\Чат\multichat\ServerMultiRoom\ServerMultiRoom\obj\Debu
 D:\multichat\ServerMultiRoom\ServerMultiRoom\bin\Debug\ServerMultiRoom.exe.config
 D:\multichat\ServerMultiRoom\ServerMultiRoom\obj\Debug\ServerMultiRoom.exe
 D:\multichat\ServerMultiRoom\ServerMultiRoom\obj\Debug\ServerMultiRoom.pdb
+D:\multichat\ServerMultiRoom\ServerMultiRoom\bin\Debug\ServerMultiRoom.exe
+D:\multichat\ServerMultiRoom\ServerMultiRoom\bin\Debug\ServerMultiRoom.pdb
+D:\multichat\ServerMultiRoom\ServerMultiRoom\bin\Debug\Newtonsoft.Json.dll
+D:\multichat\ServerMultiRoom\ServerMultiRoom\bin\Debug\Newtonsoft.Json.xml
+D:\multichat\ServerMultiRoom\ServerMultiRoom\obj\Debug\ServerMultiRoom.csprojResolveAssemblyReference.cache
