@@ -85,8 +85,19 @@ namespace ServerMultiRoom
                     }
                     break;
                 case "privateroom":
+                    if (File.Exists( "logs/" + srv.clientsList.ElementAt(index).name + "+" + req.data + ".txt"))
+                    {
+                        Request req2 = new Request("wrongprivate", null, null);
+                        string responce2 = JsonConvert.SerializeObject(req2);
 
-                        roomList.Add(new Room(req.data + "+" + srv.clientsList.ElementAt(index).name));
+                        writer = new StreamWriter(srv.clientsList.ElementAt(index).netStream);
+                        writer.WriteLine(responce2);
+                        writer.Flush();
+                        break;
+                    }
+                    fs = File.Create("logs/" +  req.data + "+" + srv.clientsList.ElementAt(index).name + ".txt");
+                    fs.Close();
+                    roomList.Add(new Room(req.data + "+" + srv.clientsList.ElementAt(index).name));
                         roomList.Last().privateroom = true;
                         roomList.Find(c => c.name == req.data + "+" + srv.clientsList.ElementAt(index).name).
                             CreatePrivate(srv.clientsList.ElementAt(index), srv.clientsList.Find(c => c.name == req.data));

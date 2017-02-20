@@ -51,3 +51,37 @@ C:\Users\nikit\Desktop\game\Чат\multichat\ServerMultiRoom\ServerMultiRoom\bin
 C:\Users\nikit\Desktop\game\Чат\multichat\ServerMultiRoom\ServerMultiRoom\bin\Debug\Newtonsoft.Json.dll
 C:\Users\nikit\Desktop\game\Чат\multichat\ServerMultiRoom\ServerMultiRoom\bin\Debug\Newtonsoft.Json.xml
 C:\Users\nikit\Desktop\game\Чат\multichat\ServerMultiRoom\ServerMultiRoom\obj\Debug\ServerMultiRoom.csprojResolveAssemblyReference.cache
+C:\Users\nikit\Desktop\Чат\multichat 1.1\ServerMultiRoom\ServerMultiRoom\bin\Debug\ServerMultiRoom.exe.config
+C:\Users\nikit\Desktop\Чат\multichat 1.1\ServerMultiRoom\ServerMultiRoom\obj\Debug\ServerMultiRoom.exe
+C:\Users\nikit\Desktop\Чат\multichat 1.1\ServerMultiRoom\ServerMultiRoom\obj\Debug\ServerMultiRoom.pdb
+C:\Users\nikit\Desktop\Чат\multichat 1.1.1\ServerMultiRoom\ServerMultiRoom\bin\Debug\ServerMultiRoom.exe.config
+C:\Users\nikit\Desktop\Чат\multichat 1.1.1\ServerMultiRoom\ServerMultiRoom\obj\Debug\ServerMultiRoom.exe
+C:\Users\nikit\Desktop\Чат\multichat 1.1.1\ServerMultiRoom\ServerMultiRoom\obj\Debug\ServerMultiRoom.pdb
+C:\Users\nikit\Desktop\Чат\multichat 1.1.1\ServerMultiRoom\ServerMultiRoom\bin\Debug\ServerMultiRoom.exe
+C:\Users\nikit\Desktop\Чат\multichat 1.1.1\ServerMultiRoom\ServerMultiRoom\bin\Debug\ServerMultiRoom.pdb
+C:\Users\nikit\Desktop\Чат\multichat 1.1.1\ServerMultiRoom\ServerMultiRoom\bin\Debug\Newtonsoft.Json.dll
+C:\Users\nikit\Desktop\Чат\multichat 1.1.1\ServerMultiRoom\ServerMultiRoom\bin\Debug\Newtonsoft.Json.xml
+C:\Users\nikit\Desktop\Чат\multichat 1.1.1\ServerMultiRoom\ServerMultiRoom\obj\Debug\ServerMultiRoom.csprojResolveAssemblyReference.cache
+C:\Users\nikit\Desktop\Чат\multichat 1.1.1\ServerMultiRoom\ServerMultiRoom\bin\Debug\EntityFramework.dll
+C:\Users\nikit\Desktop\Чат\multichat 1.1.1\ServerMultiRoom\ServerMultiRoom\bin\Debug\EntityFramework.SqlServer.dll
+C:\Users\nikit\Desktop\Чат\multichat 1.1.1\ServerMultiRoom\ServerMultiRoom\bin\Debug\System.Data.SQLite.dll
+C:\Users\nikit\Desktop\Чат\multichat 1.1.1\ServerMultiRoom\ServerMultiRoom\bin\Debug\System.Data.SQLite.EF6.dll
+C:\Users\nikit\Desktop\Чат\multichat 1.1.1\ServerMultiRoom\ServerMultiRoom\bin\Debug\System.Data.SQLite.Linq.dll
+C:\Users\nikit\Desktop\Чат\multichat 1.1.1\ServerMultiRoom\ServerMultiRoom\bin\Debug\EntityFramework.xml
+C:\Users\nikit\Desktop\Чат\multichat 1.1.1\ServerMultiRoom\ServerMultiRoom\bin\Debug\EntityFramework.SqlServer.xml
+C:\Users\nikit\Desktop\Чат\multichat 1.1.1\ServerMultiRoom\ServerMultiRoom\bin\Debug\System.Data.SQLite.xml
+C:\Users\nikit\Desktop\Чат\multichat 2\ServerMultiRoom\ServerMultiRoom\bin\Debug\ServerMultiRoom.exe.config
+C:\Users\nikit\Desktop\Чат\multichat 2\ServerMultiRoom\ServerMultiRoom\obj\Debug\ServerMultiRoom.exe
+C:\Users\nikit\Desktop\Чат\multichat 2\ServerMultiRoom\ServerMultiRoom\obj\Debug\ServerMultiRoom.pdb
+C:\Users\nikit\Desktop\Чат\multichat 2\ServerMultiRoom\ServerMultiRoom\bin\Debug\ServerMultiRoom.exe
+C:\Users\nikit\Desktop\Чат\multichat 2\ServerMultiRoom\ServerMultiRoom\bin\Debug\ServerMultiRoom.pdb
+C:\Users\nikit\Desktop\Чат\multichat 2\ServerMultiRoom\ServerMultiRoom\bin\Debug\EntityFramework.dll
+C:\Users\nikit\Desktop\Чат\multichat 2\ServerMultiRoom\ServerMultiRoom\bin\Debug\EntityFramework.SqlServer.dll
+C:\Users\nikit\Desktop\Чат\multichat 2\ServerMultiRoom\ServerMultiRoom\bin\Debug\Newtonsoft.Json.dll
+C:\Users\nikit\Desktop\Чат\multichat 2\ServerMultiRoom\ServerMultiRoom\bin\Debug\System.Data.SQLite.dll
+C:\Users\nikit\Desktop\Чат\multichat 2\ServerMultiRoom\ServerMultiRoom\bin\Debug\System.Data.SQLite.EF6.dll
+C:\Users\nikit\Desktop\Чат\multichat 2\ServerMultiRoom\ServerMultiRoom\bin\Debug\System.Data.SQLite.Linq.dll
+C:\Users\nikit\Desktop\Чат\multichat 2\ServerMultiRoom\ServerMultiRoom\bin\Debug\EntityFramework.xml
+C:\Users\nikit\Desktop\Чат\multichat 2\ServerMultiRoom\ServerMultiRoom\bin\Debug\EntityFramework.SqlServer.xml
+C:\Users\nikit\Desktop\Чат\multichat 2\ServerMultiRoom\ServerMultiRoom\bin\Debug\Newtonsoft.Json.xml
+C:\Users\nikit\Desktop\Чат\multichat 2\ServerMultiRoom\ServerMultiRoom\bin\Debug\System.Data.SQLite.xml

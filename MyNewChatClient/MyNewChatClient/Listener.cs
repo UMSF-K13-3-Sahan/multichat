@@ -17,12 +17,27 @@ namespace MyNewChatClient
         TcpClient client;
         RoomDialog rd;
         MainForm form1;
+        Thread listenthread;
+        Thread tr;
         public Listener(TcpClient client,  MainForm form1)
         {
             this.client = client;
-            Thread listenthread = new Thread(new ThreadStart(Listen));
+            listenthread = new Thread(new ThreadStart(Listen));
             listenthread.Start();
             this.form1 = form1;   
+        }
+        public void CloseThreads()
+        {
+            if (listenthread != null)
+            {
+                if (listenthread.IsAlive)
+                    listenthread.Abort();
+            }
+            if (tr != null)
+            {
+                if (tr.IsAlive)
+                    tr.Abort();
+            }
         }
         private void OpenForm()
         {
@@ -50,16 +65,15 @@ namespace MyNewChatClient
                             rd = new RoomDialog(client, form1.request);
                             rd.room.name = req.command;
                             rd.Text = req.command;
-                            string[] str = req.data.Split(',');
-                            if (str[0] == "missed")
+                            if (req.data == "missed")
                             {
-                                string[] tmp1 = str[1].Split('.');
+                                string[] tmp1 = req.time.Split('.');
                                 for (int i = 0; i < tmp1.Length; i++)
                                 {
                                     rd.rtb_message.Text += tmp1[i] + "\n";
                                 }
                             }
-                            Thread tr = new Thread(new ThreadStart(OpenForm));
+                            tr = new Thread(new ThreadStart(OpenForm));
                             tr.Start();
                             break;
                         case "leave":
@@ -91,18 +105,6 @@ namespace MyNewChatClient
                             break;
                         case "message":
                             rd.rtb_message.Text += req.data + "\n";
-                            string[] tmp = req.data.Split(':');
-                            string str11 = tmp[0];
-                            int j = 0;
-                            while (j <= rd.rtb_message.Text.Length - str11.Length)
-                            {
-                                j = rd.rtb_message.Text.IndexOf(str11, j);
-                                if (j < 0) break;
-                                rd.rtb_message.SelectionStart = j;
-                                rd.rtb_message.SelectionLength = str11.Length;
-                                rd.rtb_message.SelectionColor = Color.Red;
-                                j += str11.Length;
-                            }
                             break;
                         case "youbanned":
                             rd.rtb_message.Text += req.data + "\n";
@@ -126,18 +128,63 @@ namespace MyNewChatClient
                         case "wrongprivate":
                             MessageBox.Show("Уже есть приватная комната с этим клиентом");
                             break;
+                        case "badlogin":
+                            MessageBox.Show("Плохой Log/pass");
+                            break;
+                        case "nicelogin":
+                            VisibleComponents(req.data);
+                            break;
+
                     }
                 }
             }
             catch(Exception ex)
             {
                 MessageBox.Show("Сервер упал");
+                form1.client = null;
+                try
+                {
+                    rd.Close();
+                }
+                catch (Exception e) { }
+
                 foreach (Control item in form1.Controls)
                 {
                     item.Enabled=false;
                     client = null;
                 }
             }
+        }
+
+        private void VisibleComponents(object name)
+        {
+            form1.lst_rooms.Invoke(new Action(() => { form1.lst_rooms.Visible = true; }));
+            form1.btn_create_room.Invoke(new Action(() => { form1.btn_create_room.Visible = true; }));
+            form1.btn_refresh_rooms.Invoke(new Action(() => { form1.btn_refresh_rooms.Visible = true; }));
+            form1.btn_room_enter.Invoke(new Action(() => { form1.btn_room_enter.Visible = true; }));
+            form1.btn_refresh_clients.Invoke(new Action(() => { form1.btn_refresh_clients.Visible = true; }));
+            form1.btn_private.Invoke(new Action(() => { form1.btn_private.Visible = true; }));
+
+            form1.lst_clients.Invoke(new Action(() => { form1.lst_clients.Visible = true; }));
+            form1.lst_rooms.Invoke(new Action(() => { form1.lst_rooms.Visible = true; }));
+
+            form1.lst_clients.Invoke(new Action(() => { form1.lst_clients.Visible = true; }));
+            form1.btn_logout.Invoke(new Action(() => { form1.btn_logout.Visible = true; }));
+            form1.btn_login.Invoke(new Action(() => { form1.btn_login.Visible = false; }));
+            form1.txt_name.Invoke(new Action(() => { form1.txt_name.Visible = false; }));
+
+            form1.lb_hint.Invoke(new Action(() => { form1.lb_hint.Visible = false; }));
+            form1.label1.Invoke(new Action(() => { form1.label1.Text = (string)name; }));
+            form1.label1.Invoke(new Action(() => { form1.label1.Visible = true; }));
+            form1.txt_pass.Invoke(new Action(() => { form1.txt_pass.Visible = false; }));
+            form1.btn_reg.Invoke(new Action(() => { form1.btn_reg.Visible = false; }));
+            form1.lbl_pass.Invoke(new Action(() => { form1.lbl_pass.Visible = false; }));
+            if ((string)name == "admin")
+            {
+                form1.btn_ban.BeginInvoke(new InvokeDelegate(form1.VisibleBan));
+                form1.btn_unban.BeginInvoke(new InvokeDelegate(form1.VisibeUnban));
+            }
+
         }
     }
 }

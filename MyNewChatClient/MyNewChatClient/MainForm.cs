@@ -11,10 +11,12 @@ namespace MyNewChatClient
     public partial class MainForm : Form
     {
         Dialog dialog;
-        TcpClient client;
+        public TcpClient client;
         Auth auth;
         RefreshListBoxes refresh;
         public Request request;
+        Thread threadDialog;
+        Listener listener;
         public MainForm()
         {
             InitializeComponent();
@@ -22,13 +24,14 @@ namespace MyNewChatClient
             auth = new Auth();
             refresh = new RefreshListBoxes();
             request = new Request();
+            FormClosed += MainForm_FormClosed;
         }
 
         private void btn_create_room_Click(object sender, EventArgs e)
         {
             dialog = new Dialog("createroom",client,"name", request);
-            Thread tr = new Thread(new ThreadStart(OpenDialogForm));
-            tr.Start();
+            threadDialog = new Thread(new ThreadStart(OpenDialogForm));
+            threadDialog.Start();
             Thread.Sleep(100);
             refresh.RefreshHendler(client.GetStream(), "Rooms", request);
         }
@@ -47,47 +50,56 @@ namespace MyNewChatClient
         }
         private void btn_login_Click(object sender, EventArgs e)
         {
-            if(txt_name.Text.Length ==0)
-                MessageBox.Show("Введите имя!");
+            if(txt_name.Text.Length ==0 || txt_pass.Text.Length == 0)
+                MessageBox.Show("Введите имя и пароль!");
             else if (CheckName())
             {
                 try
                 {
                 client = new TcpClient();
                 client.Connect("127.0.0.1", 8888);
-                auth.LogInHendler(client, txt_name.Text);
+                auth.LogInHendler(client, txt_name.Text, txt_pass.Text, request);
 
-                Listener listener = new Listener(client, this);
+                listener = new Listener(client, this);
 
-                lst_rooms.Visible = true;
-                btn_create_room.Visible = true;
-                btn_refresh_rooms.Visible = true;
-                btn_room_enter.Visible = true;
-                btn_refresh_clients.Visible = true;
-                btn_private.Visible = true;
-                lst_clients.Visible = true;
-                lb_rooms.Visible = true;
-                lb_clients.Visible = true;
-                btn_logout.Visible = true;
-                btn_login.Visible = false;
-                txt_name.Visible = false;
-                lb_hint.Visible = false;
-                label1.Text = txt_name.Text;
-                label1.Visible = true;
+               
 
                 refresh.RefreshHendler(client.GetStream(), "Rooms", request);
                 refresh.RefreshHendler(client.GetStream(), "clients", request);
                 }
                 catch (Exception ex)
                 {
-                    client = null;
+                    this.client = null;
                     MessageBox.Show(ex.Message);
                 }
             }
             else
                 MessageBox.Show("Имя может содержать только буквы и цифры не более 15 символов");
+            Thread.Sleep(100);
         }
-
+        private void btn_reg_Click(object sender, EventArgs e)
+        {
+            if (txt_name.Text.Length == 0 || txt_pass.Text.Length == 0)
+                MessageBox.Show("Введите имя и пароль!");
+            else if (CheckName())
+            {
+                try
+                {
+                    client = new TcpClient();
+                    client.Connect("127.0.0.1", 8888);
+                    auth.RegHendler(client, txt_name.Text, txt_pass.Text, request);
+                    listener = new Listener(client, this);
+                }
+                catch (Exception ex)
+                {
+                    this.client = null;
+                    MessageBox.Show(ex.Message);
+                }
+            }
+            else
+                MessageBox.Show("Имя может содержать только буквы и цифры не более 15 символов");
+            Thread.Sleep(100);
+        }
         private bool CheckName()
         {
             Regex rgx = new Regex("^[а-яА-ЯёЁa-zA-Z0-9]+$");
@@ -99,25 +111,30 @@ namespace MyNewChatClient
         private void btn_logout_Click(object sender, EventArgs e)
         {
             auth.LogoutHendler(client, request);
-            lst_rooms.Visible = false;
-            btn_create_room.Visible = false;
-            btn_refresh_rooms.Visible = false;
-            btn_room_enter.Visible = false;
-            btn_refresh_clients.Visible = false;
-            btn_private.Visible = false;
-            lst_clients.Visible = false;
-            lb_rooms.Visible = false;
-            lb_clients.Visible = false;
-            btn_logout.Visible = false;
+            Application.Restart();
+            //lst_rooms.Visible = false;
+            //btn_create_room.Visible = false;
+            //btn_refresh_rooms.Visible = false;
+            //btn_room_enter.Visible = false;
+            //btn_refresh_clients.Visible = false;
+            //btn_private.Visible = false;
+            //lst_clients.Visible = false;
+            //lb_rooms.Visible = false;
+            //lb_clients.Visible = false;
+            //btn_logout.Visible = false;
 
-            label1.Visible = false;
+            //label1.Visible = false;
 
-            btn_login.Visible = true;
-            txt_name.Visible = true;
-            lb_hint.Visible = true;
-            btn_ban.Visible = false;
-            btn_unban.Visible = false;
-            txt_name.Text = "";
+            //btn_login.Visible = true;
+            //txt_name.Visible = true;
+            //lb_hint.Visible = true;
+            //btn_ban.Visible = false;
+            //btn_unban.Visible = false;
+
+            //txt_pass.Visible = true; 
+            //btn_reg.Visible = true;
+            //lbl_pass.Visible = true; 
+            //txt_name.Text = "";
         }
 
         private void btn_refresh_rooms_Click(object sender, EventArgs e)
@@ -140,8 +157,8 @@ namespace MyNewChatClient
             if (lst_clients.SelectedItem != null)
             {
                 dialog = new Dialog("ban",client, lst_clients.SelectedItem.ToString(), request);
-                Thread tr = new Thread(new ThreadStart(OpenDialogForm));
-                tr.Start();
+                threadDialog = new Thread(new ThreadStart(OpenDialogForm));
+                threadDialog.Start();
             }
         }
 
@@ -178,18 +195,26 @@ namespace MyNewChatClient
 
         private void btn_unban_Click(object sender, EventArgs e)
         {
-
             if (lst_clients.SelectedItem != null)
             {
                 dialog = new Dialog("unban",client, lst_clients.SelectedItem.ToString(),request);
-                Thread tr = new Thread(new ThreadStart(OpenDialogForm));
-                tr.Start();
+                threadDialog = new Thread(new ThreadStart(OpenDialogForm));
+                threadDialog.Start();
             }
         }
         private void MainForm_FormClosed(object sender, FormClosedEventArgs e)
         {
-            if(client != null)
-            auth.LogoutHendler(client, request);
+            try
+            {
+                auth.LogoutHendler(client, request);
+                Application.Exit();
+            }
+            catch (Exception ex)
+            {
+                Environment.Exit(0);
+            }
         }
+
+
     }
 }

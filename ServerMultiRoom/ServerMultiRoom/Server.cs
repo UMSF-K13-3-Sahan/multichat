@@ -17,7 +17,8 @@ namespace ServerMultiRoom
         public List<Client> clientsList;
         public Rooms rooms;
         Authorization auth;
-        Lobby lobbys;     
+        Lobby lobbys;
+       
 
         public Server()
         {
@@ -27,6 +28,7 @@ namespace ServerMultiRoom
             lobbys = new Lobby(this);
             clientsList = new List<Client>();
             server.Start();
+
         }
         public void Start()
         {
@@ -35,7 +37,8 @@ namespace ServerMultiRoom
                 TcpClient client = server.AcceptTcpClient();
                 auth.AddUser(client, clientsList, rooms);
                 Thread tr = new Thread(new ThreadStart(Receive));
-                tr.Start();             
+                tr.Start();
+                Thread.Sleep(100);             
             }
         }
         public void Receive()
@@ -63,10 +66,12 @@ namespace ServerMultiRoom
                                     break;
                             }
                         }
+                        Thread.Sleep(100);
                     }
                     catch(Exception ex)
                     {
-                     //   clientsList.Remove(clientsList[i]);
+                        if(clientsList.Count < i)
+                          clientsList.Remove(clientsList[i]);
                     }
                 }
             }

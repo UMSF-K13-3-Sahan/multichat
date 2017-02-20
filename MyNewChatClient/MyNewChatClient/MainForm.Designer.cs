@@ -44,11 +44,14 @@
             this.lb_rooms = new System.Windows.Forms.Label();
             this.lb_clients = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
+            this.txt_pass = new System.Windows.Forms.TextBox();
+            this.lbl_pass = new System.Windows.Forms.Label();
+            this.btn_reg = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // btn_login
             // 
-            this.btn_login.Location = new System.Drawing.Point(162, 25);
+            this.btn_login.Location = new System.Drawing.Point(13, 62);
             this.btn_login.Name = "btn_login";
             this.btn_login.Size = new System.Drawing.Size(122, 23);
             this.btn_login.TabIndex = 0;
@@ -58,7 +61,7 @@
             // 
             // btn_logout
             // 
-            this.btn_logout.Location = new System.Drawing.Point(162, 25);
+            this.btn_logout.Location = new System.Drawing.Point(161, 26);
             this.btn_logout.Name = "btn_logout";
             this.btn_logout.Size = new System.Drawing.Size(122, 23);
             this.btn_logout.TabIndex = 1;
@@ -71,16 +74,16 @@
             // 
             this.txt_name.Location = new System.Drawing.Point(12, 28);
             this.txt_name.Name = "txt_name";
-            this.txt_name.Size = new System.Drawing.Size(135, 20);
+            this.txt_name.Size = new System.Drawing.Size(123, 20);
             this.txt_name.TabIndex = 2;
             // 
             // lst_rooms
             // 
             this.lst_rooms.FormattingEnabled = true;
-            this.lst_rooms.Location = new System.Drawing.Point(12, 78);
+            this.lst_rooms.Location = new System.Drawing.Point(13, 78);
             this.lst_rooms.MultiColumn = true;
             this.lst_rooms.Name = "lst_rooms";
-            this.lst_rooms.Size = new System.Drawing.Size(135, 238);
+            this.lst_rooms.Size = new System.Drawing.Size(134, 238);
             this.lst_rooms.TabIndex = 3;
             this.lst_rooms.Visible = false;
             // 
@@ -172,6 +175,9 @@
             // 
             // lb_hint
             // 
+            this.lb_hint.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.lb_hint.AutoSize = true;
             this.lb_hint.Location = new System.Drawing.Point(10, 9);
             this.lb_hint.Name = "lb_hint";
@@ -209,11 +215,43 @@
             this.label1.Text = "label1";
             this.label1.Visible = false;
             // 
+            // txt_pass
+            // 
+            this.txt_pass.Location = new System.Drawing.Point(161, 28);
+            this.txt_pass.Name = "txt_pass";
+            this.txt_pass.Size = new System.Drawing.Size(123, 20);
+            this.txt_pass.TabIndex = 17;
+            // 
+            // lbl_pass
+            // 
+            this.lbl_pass.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.lbl_pass.AutoSize = true;
+            this.lbl_pass.Location = new System.Drawing.Point(159, 12);
+            this.lbl_pass.Name = "lbl_pass";
+            this.lbl_pass.Size = new System.Drawing.Size(57, 13);
+            this.lbl_pass.TabIndex = 18;
+            this.lbl_pass.Text = "Enter pass";
+            // 
+            // btn_reg
+            // 
+            this.btn_reg.Location = new System.Drawing.Point(161, 62);
+            this.btn_reg.Name = "btn_reg";
+            this.btn_reg.Size = new System.Drawing.Size(122, 23);
+            this.btn_reg.TabIndex = 19;
+            this.btn_reg.Text = "Registration";
+            this.btn_reg.UseVisualStyleBackColor = true;
+            this.btn_reg.Click += new System.EventHandler(this.btn_reg_Click);
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(296, 483);
+            this.Controls.Add(this.btn_reg);
+            this.Controls.Add(this.lbl_pass);
+            this.Controls.Add(this.txt_pass);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.lb_clients);
             this.Controls.Add(this.lb_rooms);
@@ -230,9 +268,9 @@
             this.Controls.Add(this.txt_name);
             this.Controls.Add(this.btn_logout);
             this.Controls.Add(this.btn_login);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Name = "MainForm";
             this.Text = "Form1";
-            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.MainForm_FormClosed);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -252,10 +290,13 @@
         public System.Windows.Forms.Button btn_refresh_clients;
         public System.Windows.Forms.Button btn_ban;
         public System.Windows.Forms.Button btn_unban;
-        private System.Windows.Forms.Label lb_hint;
         private System.Windows.Forms.Label lb_rooms;
         private System.Windows.Forms.Label lb_clients;
-        private System.Windows.Forms.Label label1;
+        public System.Windows.Forms.Button btn_reg;
+        public System.Windows.Forms.Label lb_hint;
+        public System.Windows.Forms.TextBox txt_pass;
+        public System.Windows.Forms.Label lbl_pass;
+        public System.Windows.Forms.Label label1;
     }
 }
 

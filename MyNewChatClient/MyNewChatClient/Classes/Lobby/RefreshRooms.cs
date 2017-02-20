@@ -5,6 +5,7 @@ using System.IO;
 using System.Linq;
 using System.Net.Sockets;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
@@ -12,13 +13,10 @@ namespace MyNewChatClient
 {
     class RefreshListBoxes
     {
-       
 
         public RefreshListBoxes()
         {
-           
         }
-
         public void RefreshHendler(NetworkStream stream, string type, Request request)
         {
             StreamWriter writer = new StreamWriter(stream);
@@ -38,6 +36,7 @@ namespace MyNewChatClient
                 writer.WriteLine(JsonConvert.SerializeObject(request));
             }
             writer.Flush();
+            Thread.Sleep(500);
         }
     }
 }

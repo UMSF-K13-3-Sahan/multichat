@@ -36,6 +36,7 @@
             // 
             // btn_back
             // 
+            this.btn_back.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.btn_back.DialogResult = System.Windows.Forms.DialogResult.Cancel;
             this.btn_back.Location = new System.Drawing.Point(493, 12);
             this.btn_back.Name = "btn_back";
@@ -47,6 +48,7 @@
             // 
             // btn_send
             // 
+            this.btn_send.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.btn_send.Location = new System.Drawing.Point(493, 315);
             this.btn_send.Name = "btn_send";
             this.btn_send.Size = new System.Drawing.Size(75, 23);
@@ -57,17 +59,22 @@
             // 
             // rtb_message
             // 
+            this.rtb_message.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.rtb_message.Location = new System.Drawing.Point(12, 12);
             this.rtb_message.Name = "rtb_message";
-            this.rtb_message.Size = new System.Drawing.Size(475, 288);
+            this.rtb_message.ReadOnly = true;
+            this.rtb_message.Size = new System.Drawing.Size(475, 293);
             this.rtb_message.TabIndex = 3;
             this.rtb_message.Text = "";
             // 
             // txt_msg
             // 
-            this.txt_msg.Location = new System.Drawing.Point(15, 319);
+            this.txt_msg.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.txt_msg.Location = new System.Drawing.Point(12, 311);
+            this.txt_msg.Multiline = false;
             this.txt_msg.Name = "txt_msg";
-            this.txt_msg.Size = new System.Drawing.Size(471, 18);
+            this.txt_msg.ShortcutsEnabled = false;
+            this.txt_msg.Size = new System.Drawing.Size(475, 27);
             this.txt_msg.TabIndex = 4;
             this.txt_msg.Text = "";
             // 
@@ -83,10 +90,12 @@
             this.Controls.Add(this.btn_send);
             this.Controls.Add(this.btn_back);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
+            this.KeyPreview = true;
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "RoomDialog";
             this.Text = "chat";
+            this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.RoomDialog_KeyDown);
             this.ResumeLayout(false);
 
         }

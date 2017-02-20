@@ -22,6 +22,7 @@ namespace MyNewChatClient
         {
            if( room.SendHendler(txt_msg.Text, request) )
                 txt_msg.Text = "";
+            txt_msg.Focus();
         }
         private void btn_back_Click(object sender, EventArgs e)
         {
@@ -30,6 +31,17 @@ namespace MyNewChatClient
         private void txt_msg_TextChanged(object sender, EventArgs e)
         {
             room.ChengeTextHendler(txt_msg.Text);
+        }
+
+        private void RoomDialog_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                if (room.SendHendler(txt_msg.Text, request))
+                    txt_msg.Clear();
+            }
+            txt_msg.SelectionLength = 0;
+            txt_msg.Focus();
         }
     }
 }

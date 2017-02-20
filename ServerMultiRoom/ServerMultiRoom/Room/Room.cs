@@ -71,7 +71,7 @@ namespace ServerMultiRoom
                     response = response.TrimEnd('.');
                     pasive.Remove(client);
                     activeList.Add(client);
-                    req = new Request("enter", room, "missed,"+ response);
+                    req = new Request("enter", room, "missed",response);
                     return JsonConvert.SerializeObject(req);
                 }
                 else
