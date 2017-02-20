@@ -55,6 +55,7 @@ namespace MyNewChatClient
                     switch (req.modul)
                     {
                         case "ok":
+                            VisibleComponents(req.data);
                             if (req.data == "admin")
                             {
                                 form1.btn_ban.BeginInvoke(new InvokeDelegate(form1.VisibleBan));
@@ -129,12 +130,8 @@ namespace MyNewChatClient
                             MessageBox.Show("Уже есть приватная комната с этим клиентом");
                             break;
                         case "badlogin":
-                            MessageBox.Show("Плохой Log/pass");
+                            MessageBox.Show("Плохой Log/pass или юзер online");
                             break;
-                        case "nicelogin":
-                            VisibleComponents(req.data);
-                            break;
-
                     }
                 }
             }

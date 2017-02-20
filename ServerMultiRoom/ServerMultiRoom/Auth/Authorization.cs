@@ -39,8 +39,15 @@ namespace ServerMultiRoom
                     }
                     Thread.Sleep(100);
                     req.data = client.name;
-                    req.modul = "nicelogin";
+                    req.modul = "ok";
                     StreamWriter writer = new StreamWriter(client.netStream);
+                    writer.WriteLine(JsonConvert.SerializeObject(req));
+                    writer.Flush();
+                }
+                else
+                {
+                    req.modul = "badlogin";
+                    StreamWriter writer = new StreamWriter(tcpclient.GetStream());
                     writer.WriteLine(JsonConvert.SerializeObject(req));
                     writer.Flush();
                 }

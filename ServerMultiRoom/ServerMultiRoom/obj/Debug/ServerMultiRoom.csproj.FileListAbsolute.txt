@@ -85,3 +85,11 @@ C:\Users\nikit\Desktop\Чат\multichat 2\ServerMultiRoom\ServerMultiRoom\bin\De
 C:\Users\nikit\Desktop\Чат\multichat 2\ServerMultiRoom\ServerMultiRoom\bin\Debug\EntityFramework.SqlServer.xml
 C:\Users\nikit\Desktop\Чат\multichat 2\ServerMultiRoom\ServerMultiRoom\bin\Debug\Newtonsoft.Json.xml
 C:\Users\nikit\Desktop\Чат\multichat 2\ServerMultiRoom\ServerMultiRoom\bin\Debug\System.Data.SQLite.xml
+C:\Users\nikit\Desktop\Чат\multichat\ServerMultiRoom\ServerMultiRoom\bin\Debug\EntityFramework.dll
+C:\Users\nikit\Desktop\Чат\multichat\ServerMultiRoom\ServerMultiRoom\bin\Debug\EntityFramework.SqlServer.dll
+C:\Users\nikit\Desktop\Чат\multichat\ServerMultiRoom\ServerMultiRoom\bin\Debug\System.Data.SQLite.dll
+C:\Users\nikit\Desktop\Чат\multichat\ServerMultiRoom\ServerMultiRoom\bin\Debug\System.Data.SQLite.EF6.dll
+C:\Users\nikit\Desktop\Чат\multichat\ServerMultiRoom\ServerMultiRoom\bin\Debug\System.Data.SQLite.Linq.dll
+C:\Users\nikit\Desktop\Чат\multichat\ServerMultiRoom\ServerMultiRoom\bin\Debug\EntityFramework.xml
+C:\Users\nikit\Desktop\Чат\multichat\ServerMultiRoom\ServerMultiRoom\bin\Debug\EntityFramework.SqlServer.xml
+C:\Users\nikit\Desktop\Чат\multichat\ServerMultiRoom\ServerMultiRoom\bin\Debug\System.Data.SQLite.xml

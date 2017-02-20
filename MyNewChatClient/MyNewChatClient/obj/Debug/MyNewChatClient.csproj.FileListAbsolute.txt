@@ -144,3 +144,4 @@ C:\Users\nikit\Desktop\Чат\multichat 2\MyNewChatClient\MyNewChatClient\obj\De
 C:\Users\nikit\Desktop\Чат\multichat 2\MyNewChatClient\MyNewChatClient\obj\Debug\MyNewChatClient.MainForm.resources
 C:\Users\nikit\Desktop\Чат\multichat 2\MyNewChatClient\MyNewChatClient\obj\Debug\MyNewChatClient.Properties.Resources.resources
 C:\Users\nikit\Desktop\Чат\multichat 2\MyNewChatClient\MyNewChatClient\obj\Debug\MyNewChatClient.csproj.GenerateResource.Cache
+C:\Users\nikit\Desktop\Чат\multichat\MyNewChatClient\MyNewChatClient\obj\Debug\MyNewChatClient.csprojResolveAssemblyReference.cache

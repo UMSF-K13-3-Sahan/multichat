@@ -112,29 +112,6 @@ namespace MyNewChatClient
         {
             auth.LogoutHendler(client, request);
             Application.Restart();
-            //lst_rooms.Visible = false;
-            //btn_create_room.Visible = false;
-            //btn_refresh_rooms.Visible = false;
-            //btn_room_enter.Visible = false;
-            //btn_refresh_clients.Visible = false;
-            //btn_private.Visible = false;
-            //lst_clients.Visible = false;
-            //lb_rooms.Visible = false;
-            //lb_clients.Visible = false;
-            //btn_logout.Visible = false;
-
-            //label1.Visible = false;
-
-            //btn_login.Visible = true;
-            //txt_name.Visible = true;
-            //lb_hint.Visible = true;
-            //btn_ban.Visible = false;
-            //btn_unban.Visible = false;
-
-            //txt_pass.Visible = true; 
-            //btn_reg.Visible = true;
-            //lbl_pass.Visible = true; 
-            //txt_name.Text = "";
         }
 
         private void btn_refresh_rooms_Click(object sender, EventArgs e)
