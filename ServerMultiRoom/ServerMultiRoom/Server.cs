@@ -28,7 +28,8 @@ namespace ServerMultiRoom
             lobbys = new Lobby(this);
             clientsList = new List<Client>();
             server.Start();
-
+            Thread tr = new Thread(new ThreadStart(Receive));
+            tr.Start();
         }
         public void Start()
         {
@@ -36,8 +37,6 @@ namespace ServerMultiRoom
             {
                 TcpClient client = server.AcceptTcpClient();
                 auth.AddUser(client, clientsList, rooms);
-                Thread tr = new Thread(new ThreadStart(Receive));
-                tr.Start();
                 Thread.Sleep(100);             
             }
         }
@@ -52,6 +51,9 @@ namespace ServerMultiRoom
                         if (clientsList[i].netStream.DataAvailable)
                         {
                             string message = clientsList[i].Read();
+                            if (clientsList[i].us.Type == ClientType.Web){
+                                message = clientsList[i].us.Decode();
+                            }
                             Request req = JsonConvert.DeserializeObject<Request>(message);
                             switch (req.modul)
                             {
@@ -91,9 +93,7 @@ namespace ServerMultiRoom
             Request req = new Request("refresh", null, roomss);
             string responce = JsonConvert.SerializeObject(req);
 
-            StreamWriter writer = new StreamWriter(clientsList.ElementAt(index).netStream);
-            writer.WriteLine(responce);
-            writer.Flush();
+            clientsList.ElementAt(index).Write(responce);
 
             for (int z = 0; z < rooms.roomList.Count; z++)
             {
@@ -123,9 +123,7 @@ namespace ServerMultiRoom
             Request req = new Request("refreshclients", null, clients);
             string responce = JsonConvert.SerializeObject(req);
 
-            StreamWriter writer = new StreamWriter(clientsList.ElementAt(index).netStream);
-            writer.WriteLine(responce);
-            writer.Flush();
+            clientsList.ElementAt(index).Write(responce);
         }
         public void DeleteLogs()
         {

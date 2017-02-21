@@ -20,7 +20,6 @@ namespace ServerMultiRoom
         }
         public void SetCommand(Request req, int index)
         {
-            StreamWriter writer;
             switch (req.command)
             {
                 case "createroom":
@@ -29,9 +28,8 @@ namespace ServerMultiRoom
                         Request req2 = new Request("bancreate", null, "Вы забанено до " + BanTime(srv.clientsList.ElementAt(index)));
                         string responce2 = JsonConvert.SerializeObject(req2);
 
-                        writer = new StreamWriter(srv.clientsList.ElementAt(index).netStream);
-                        writer.WriteLine(responce2);
-                        writer.Flush();
+                        srv.clientsList.ElementAt(index).Write(responce2);
+
                         break;
                     }
                     if (File.Exists("logs/" + req.data + ".txt"))
@@ -39,9 +37,7 @@ namespace ServerMultiRoom
                         Request req2 = new Request("wrongroom", null, req.data);
                         string responce2 = JsonConvert.SerializeObject(req2);
 
-                        writer = new StreamWriter(srv.clientsList.ElementAt(index).netStream);
-                        writer.WriteLine(responce2);
-                        writer.Flush();
+                        srv.clientsList.ElementAt(index).Write(responce2);
                         break;
                     }
                     FileStream fs = File.Create("logs/" + req.data + ".txt");
@@ -60,14 +56,12 @@ namespace ServerMultiRoom
                     Request request = new Request("leave", null, null);
                     string responce = JsonConvert.SerializeObject(request);
 
-                    writer = new StreamWriter(srv.clientsList.ElementAt(index).netStream);
-                    writer.WriteLine(responce);
-                    writer.Flush();
+                    srv.clientsList.ElementAt(index).Write(responce);
                     break;
                 case "enter":
-                    writer = new StreamWriter(srv.clientsList.ElementAt(index).netStream);
-                    writer.WriteLine(roomList.Find(c => c.name == req.data).Add(srv.clientsList.ElementAt(index), req.data));
-                    writer.Flush();
+                    srv.clientsList.ElementAt(index).Write(roomList.Find
+                        (c => c.name == req.data).
+                        Add(srv.clientsList.ElementAt(index), req.data));
                     Thread.Sleep(100);
                     srv.SetRoom(srv.clientsList, srv.rooms, index);
                     break;
@@ -79,9 +73,7 @@ namespace ServerMultiRoom
                         Request req1 = new Request("youbanned", null, "you are banned to " + BanTime(srv.clientsList.ElementAt(index)));
                         string resp = JsonConvert.SerializeObject(req1);
 
-                        writer = new StreamWriter(srv.clientsList.ElementAt(index).netStream);
-                        writer.WriteLine(resp);
-                        writer.Flush();
+                        srv.clientsList.ElementAt(index).Write(resp);
                     }
                     break;
                 case "privateroom":
@@ -90,9 +82,7 @@ namespace ServerMultiRoom
                         Request req2 = new Request("wrongprivate", null, null);
                         string responce2 = JsonConvert.SerializeObject(req2);
 
-                        writer = new StreamWriter(srv.clientsList.ElementAt(index).netStream);
-                        writer.WriteLine(responce2);
-                        writer.Flush();
+                        srv.clientsList.ElementAt(index).Write(responce2);
                         break;
                     }
                     fs = File.Create("logs/" +  req.data + "+" + srv.clientsList.ElementAt(index).name + ".txt");

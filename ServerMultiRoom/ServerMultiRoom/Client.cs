@@ -12,17 +12,21 @@ namespace ServerMultiRoom
         public string name { get; set; }
         public TcpClient client;
         public NetworkStream netStream;
-        private StreamReader sr;
-        public Client(TcpClient client, string name)
+        public UniversalStream us;
+        public Client(TcpClient client, string name, UniversalStream us)
         {
             this.client = client;
             netStream = client.GetStream();
-            sr = new StreamReader(netStream);
+            this.us = us;
             this.name = name;
         }
         public string Read()
         {
-            return sr.ReadLine();
+            return us.Read();
+        }
+        public void Write(string message)
+        {
+            us.Write(message);
         }
     }
 

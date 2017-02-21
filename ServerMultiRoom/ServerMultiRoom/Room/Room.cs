@@ -29,17 +29,13 @@ namespace ServerMultiRoom
                 activeList.Add(namecreator);
                 pasive.Add(nameinvited, 0);
                 Request req = new Request("enter", nameinvited.name + "+" + namecreator.name, "nomissed");
-                StreamWriter sq = new StreamWriter(namecreator.netStream);
-                sq.WriteLine(JsonConvert.SerializeObject(req));
-                sq.Flush();
+                namecreator.Write(JsonConvert.SerializeObject(req));
             }
             catch(Exception ex)
             {
-                StreamWriter sw = new StreamWriter(namecreator.netStream);
                 Request request = new Request("wrongprivate", null, null);
                 string responce = JsonConvert.SerializeObject(request);
-                sw.WriteLine(responce);
-                sw.Flush();
+                namecreator.Write(responce);
             }
             
         }
@@ -103,10 +99,7 @@ namespace ServerMultiRoom
             for (int i = 0; i < activeList.Count(); i++)
             {
                 Request req = new Request("message",null, name + ":" + message);
-
-                StreamWriter writer = new StreamWriter(activeList[i].netStream);
-                writer.WriteLine(JsonConvert.SerializeObject(req));
-                writer.Flush();
+                activeList[i].Write(JsonConvert.SerializeObject(req));
             }
             SendForPassiv();
         }
@@ -119,10 +112,8 @@ namespace ServerMultiRoom
                 {
                     int a = pasive[pasive.Keys.ElementAt(i)];
                     Request req = new Request("pofig",name,(str.Length - a).ToString());
+                    pasive.Keys.ElementAt(i).Write(JsonConvert.SerializeObject(req));
 
-                    StreamWriter writer = new StreamWriter(pasive.Keys.ElementAt(i).netStream);
-                    writer.WriteLine(JsonConvert.SerializeObject(req));
-                    writer.Flush();
                 }
             }
         }

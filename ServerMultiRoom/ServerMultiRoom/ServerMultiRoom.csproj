@@ -75,12 +75,14 @@
     <Compile Include="Lobby\AdminFunc.cs" />
     <Compile Include="Auth\Authorization.cs" />
     <Compile Include="Client.cs" />
+    <Compile Include="LogManager.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Request.cs" />
     <Compile Include="Rooms.cs" />
     <Compile Include="Room\Room.cs" />
     <Compile Include="Server.cs" />
+    <Compile Include="UniversalStream.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

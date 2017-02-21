@@ -7,6 +7,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using Newtonsoft.Json;
 using System.IO;
+using System.Text.RegularExpressions;
 
 namespace ServerMultiRoom
 {
@@ -19,18 +20,34 @@ namespace ServerMultiRoom
             this.server = server;
             dbmanager = new DataBaseManager();
         }
-        public void AddUser(TcpClient tcpclient, List<Client> clientsList, Rooms rooms)
+        public void AddUser(TcpClient connectedClient, List<Client> clientsList, Rooms rooms)
         {
-            StreamReader sr = new StreamReader(tcpclient.GetStream());
-            string resp = sr.ReadLine();
-            Request req = JsonConvert.DeserializeObject<Request>(resp);
+            UniversalStream stream = new UniversalStream(connectedClient);
+
+            while (!connectedClient.GetStream().DataAvailable) { }
+
+            string data = stream.Read();
+            if (new Regex("^GET").IsMatch(data))
+            {
+                stream.Type = ClientType.Web;
+                stream.WriteHandshake(data);
+
+                while (!connectedClient.GetStream().DataAvailable) { }
+
+                data = stream.Read();
+            }
+
+            if (stream.Type == ClientType.Web)
+                data = stream.Decode();
+
+            Request req = JsonConvert.DeserializeObject<Request>(data);
 
             if (dbmanager.CreateNewLogin(req.modul, req.data, req.command))
             {
                 Client cl = clientsList.Find(c => c.name == req.modul);
                 if (cl == null)
                 {
-                    Client client = new Client(tcpclient, req.modul);
+                    Client client = new Client(connectedClient, req.modul, stream);
                     clientsList.Add(client);
                     if (client.name == "admin")
                     {
@@ -40,24 +57,18 @@ namespace ServerMultiRoom
                     Thread.Sleep(100);
                     req.data = client.name;
                     req.modul = "ok";
-                    StreamWriter writer = new StreamWriter(client.netStream);
-                    writer.WriteLine(JsonConvert.SerializeObject(req));
-                    writer.Flush();
+                    stream.Write(JsonConvert.SerializeObject(req));
                 }
                 else
                 {
                     req.modul = "badlogin";
-                    StreamWriter writer = new StreamWriter(tcpclient.GetStream());
-                    writer.WriteLine(JsonConvert.SerializeObject(req));
-                    writer.Flush();
+                    stream.Write(JsonConvert.SerializeObject(req));
                 }
             }
             else
             {
                 req.modul = "badlogin";
-                StreamWriter writer = new StreamWriter(tcpclient.GetStream());
-                writer.WriteLine(JsonConvert.SerializeObject(req));
-                writer.Flush();
+                stream.Write(JsonConvert.SerializeObject(req));
             }
         }
         private void ForAdmin(Client client, Rooms rooms)
